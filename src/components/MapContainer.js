@@ -1,11 +1,22 @@
 import React, { Component } from "react";
-import { Map, Marker, Popup, TileLayer, Circle } from "react-leaflet";
+import {
+  Map,
+  Marker,
+  Popup,
+  TileLayer,
+  Circle,
+  Rectangle
+} from "react-leaflet";
 import { MapContext } from "../context/MapContext";
 
 class MainMap extends Component {
+  componentDidMount() {
+    console.log("mounted");
+  }
+
   render() {
     const position = [32, -95];
-    const map = (
+    return (
       <MapContext.Consumer>
         {context => (
           <React.Fragment>
@@ -15,16 +26,17 @@ class MainMap extends Component {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | 2024 Eclipse Planner'
               />
               <Marker position={position}>
-                <Popup>Nola</Popup>
+                <Popup>{context.state.eclipsePath.year}</Popup>
               </Marker>
               <Circle center={position} radius={200000} />
+              <Rectangle
+                bounds={[[49.11, -7.825], [-19.786666666667, -158.53166666667]]}
+              />
             </Map>
-            <div>{context.state.test}</div>
           </React.Fragment>
         )}
       </MapContext.Consumer>
     );
-    return map;
   }
 }
 

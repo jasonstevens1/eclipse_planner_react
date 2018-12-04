@@ -5,7 +5,8 @@ export const MapContext = React.createContext({});
 
 export class MapProvider extends Component {
   state = {
-    test: "Test"
+    test: "Test",
+    eclipsePath: {}
   };
 
   async componentDidMount() {
