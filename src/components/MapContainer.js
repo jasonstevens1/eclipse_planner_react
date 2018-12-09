@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { MapContext } from "../context/MapContext";
 import {
   Map,
   Marker,
@@ -7,7 +8,6 @@ import {
   Circle,
   Rectangle
 } from "react-leaflet";
-import { MapContext } from "../context/MapContext";
 
 class MainMap extends Component {
   componentDidMount() {
@@ -26,11 +26,11 @@ class MainMap extends Component {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | 2024 Eclipse Planner'
               />
               <Marker position={position}>
-                <Popup>{context.state.eclipsePath.year}</Popup>
+                <Popup>{console.log(context.state.eclipsePath)}</Popup>
               </Marker>
               <Circle center={position} radius={200000} />
               <Rectangle
-                bounds={[[49.11, -7.825], [-19.786666666667, -158.53166666667]]}
+                bounds={[[50.11, -7.825], [-19.7866666667, -158.531666667]]}
               />
             </Map>
           </React.Fragment>
