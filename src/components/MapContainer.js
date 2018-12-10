@@ -10,10 +10,6 @@ import {
 } from "react-leaflet";
 
 class MainMap extends Component {
-  componentDidMount() {
-    console.log("mounted");
-  }
-
   render() {
     const position = [32, -95];
     return (
@@ -26,7 +22,7 @@ class MainMap extends Component {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | 2024 Eclipse Planner'
               />
               <Marker position={position}>
-                <Popup>{console.log(context.state.eclipsePath)}</Popup>
+                <Popup>{context.state.eclipsePath.points}</Popup>
               </Marker>
               <Circle center={position} radius={200000} />
               <Rectangle

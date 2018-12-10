@@ -9,9 +9,8 @@ export class MapProvider extends Component {
     eclipsePath: {}
   };
 
-  async componentDidMount() {
+  async componentWillMount() {
     const res = await axios.get("http://localhost/eclipseAPI/index.php");
-
     this.setState({ eclipsePath: res.data });
   }
 

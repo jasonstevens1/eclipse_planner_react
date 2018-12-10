@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import MapContainer from "./components/MapContainer";
 import { MapProvider } from "./context/MapContext";
+import MapContainer from "./components/MapContainer";
 
 class App extends Component {
   render() {
