@@ -12,6 +12,7 @@ import {
 class MainMap extends Component {
   render() {
     const position = [32, -95];
+    const position2 = [-4.341, -145.49];
     return (
       <MapContext.Consumer>
         {context => (
@@ -23,6 +24,12 @@ class MainMap extends Component {
               />
               <Marker position={position}>
                 <Popup>{context.state.eclipsePath.points}</Popup>
+              </Marker>
+              <Marker position={position2}>
+                <Popup>Test</Popup>
+              </Marker>
+              <Marker position={[-2.451, -140.03]}>
+                <Popup>Test</Popup>
               </Marker>
               <Circle center={position} radius={200000} />
               <Rectangle
