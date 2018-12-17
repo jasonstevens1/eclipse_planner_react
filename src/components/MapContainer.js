@@ -1,44 +1,47 @@
 import React, { Component } from "react";
-import { MapContext } from "../context/MapContext";
+import { Consumer } from "../context/MapContext";
 import {
   Map,
   Marker,
   Popup,
   TileLayer,
   Circle,
-  Rectangle
+  Rectangle,
+  Polyline
 } from "react-leaflet";
+import Spinner from "./Spinner";
 
 class MainMap extends Component {
   render() {
     const position = [32, -95];
     const position2 = [-4.341, -145.49];
+
     return (
-      <MapContext.Consumer>
-        {context => (
-          <React.Fragment>
-            <Map center={position} zoom={5}>
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | 2024 Eclipse Planner'
-              />
-              <Marker position={position}>
-                <Popup>{context.state.eclipsePath.points}</Popup>
-              </Marker>
-              <Marker position={position2}>
-                <Popup>Test</Popup>
-              </Marker>
-              <Marker position={[-2.451, -140.03]}>
-                <Popup>Test</Popup>
-              </Marker>
-              <Circle center={position} radius={200000} />
-              <Rectangle
-                bounds={[[50.11, -7.825], [-19.7866666667, -158.531666667]]}
-              />
-            </Map>
-          </React.Fragment>
-        )}
-      </MapContext.Consumer>
+      <Consumer>
+        {value => {
+          const { eclipsePath } = value;
+          if (eclipsePath === undefined || eclipsePath.length === 0) {
+            return <Spinner />;
+          } else {
+            return (
+              <React.Fragment>
+                <Map center={position} zoom={5}>
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | 2024 Eclipse Planner'
+                  />
+
+                  {eclipsePath.map(point => (
+                    <Marker key={point[0]} position={[point[1], point[2]]}>
+                      {point[0]}
+                    </Marker>
+                  ))}
+                </Map>
+              </React.Fragment>
+            );
+          }
+        }}
+      </Consumer>
     );
   }
 }
